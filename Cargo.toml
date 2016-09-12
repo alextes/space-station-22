@@ -1,0 +1,13 @@
+[package]
+name = "space_station_22"
+version = "0.1.0"
+authors = ["Alexander Tesfamichael <Alex.Tesfamichael@gmail.com>"]
+
+[[bin]]
+name = "space-station-22"
+
+[dependencies]
+piston = "0.22.0"
+piston2d-graphics = "0.16.0"
+pistoncore-glutin_window = "0.26.0"
+piston2d-opengl_graphics = "0.28.0"
