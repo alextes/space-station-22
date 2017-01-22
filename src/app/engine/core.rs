@@ -9,7 +9,7 @@ pub fn render(gl: &mut GlGraphics, args: &RenderArgs) {
     const BLACK: [f32; 4] = [0.0, 0.0, 0.0, 0.0];
 
     //Create the image object and attach a square Rectangle object inside.
-    let image   = Image::new().rect(square(0.0, 0.0, 200.0));
+    let image   = Image::new().rect(square(0.0, 0.0, 160.0));
     //A texture to use with the image
     let texture = Texture::from_path(Path::new("/Users/alexander/code/space-station-22/res/AutoReiv.png")).unwrap();
 

@@ -15,7 +15,7 @@ impl App {
         let opengl = OpenGL::V3_2;
 
         // Create an Glutin window.
-        let mut window: Window = WindowSettings::new("space station 22", [200, 200])
+        let mut window: Window = WindowSettings::new("space station 22", [160, 160])
             .opengl(opengl)
             .exit_on_esc(true)
             .build()
