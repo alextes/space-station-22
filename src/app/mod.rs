@@ -1,8 +1,8 @@
-use piston::window::WindowSettings;
-use piston::event_loop::*;
-use piston::input::*;
 use glutin_window::GlutinWindow as Window;
 use opengl_graphics::{GlGraphics, OpenGL};
+use piston::event_loop::*;
+use piston::input::*;
+use piston::window::WindowSettings;
 
 mod engine;
 
@@ -22,7 +22,9 @@ impl App {
             .unwrap();
 
         // Create a new game and run it.
-        let mut app = App { gl: GlGraphics::new(opengl) };
+        let mut app = App {
+            gl: GlGraphics::new(opengl),
+        };
 
         let mut events = window.events();
         while let Some(e) = events.next(&mut window) {
