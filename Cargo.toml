@@ -3,5 +3,7 @@ name = "space_station_22"
 version = "0.1.0"
 authors = ["Alexander Tesfamichael <Alex.Tesfamichael@gmail.com>"]
 
-[dependencies]
-ggez = "0.4.3"
+[dependencies.sdl2]
+version = "0.31"
+default-features = false
+features = ["ttf","image","gfx"]
