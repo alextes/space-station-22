@@ -5,7 +5,8 @@ use sdl2::image::{LoadTexture, INIT_JPG, INIT_PNG};
 use sdl2::keyboard::Keycode;
 use std::path::Path;
 
-pub fn run(png: &Path) {
+fn main() {
+    let tiles_source = Path::new("resources/AutoReiv.png");
     let sdl_context = sdl2::init().unwrap();
     let video_subsystem = sdl_context.video().unwrap();
     let _image_context = sdl2::image::init(INIT_PNG | INIT_JPG).unwrap();
@@ -17,7 +18,7 @@ pub fn run(png: &Path) {
 
     let mut canvas = window.into_canvas().software().build().unwrap();
     let texture_creator = canvas.texture_creator();
-    let texture = texture_creator.load_texture(png).unwrap();
+    let texture = texture_creator.load_texture(tiles_source).unwrap();
 
     canvas.copy(&texture, None, None).expect("Render failed");
     canvas.present();
@@ -34,8 +35,4 @@ pub fn run(png: &Path) {
             }
         }
     }
-}
-
-fn main() {
-    run(Path::new("resources/AutoReiv.png"));
 }
