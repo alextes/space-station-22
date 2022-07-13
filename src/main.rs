@@ -1,45 +1,56 @@
 extern crate sdl2;
 
-use sdl2::event::Event;
-use sdl2::image::{LoadTexture, INIT_JPG, INIT_PNG};
-use sdl2::keyboard::Keycode;
-use sdl2::pixels::Color;
 use std::path::Path;
 
+use sdl2::event::Event;
+use sdl2::image::{InitFlag, LoadTexture};
+use sdl2::keyboard::Keycode;
+use sdl2::rect::Rect;
+
 fn main() {
-    let tilesheet_path = Path::new("resources/AutoReiv.png");
     let sdl_context = sdl2::init().unwrap();
     let video_subsystem = sdl_context.video().unwrap();
-    let _image_context = sdl2::image::init(INIT_PNG | INIT_JPG).unwrap();
+    let _image_context = sdl2::image::init(InitFlag::PNG).unwrap();
+
     let window = video_subsystem
-        .window("Space Station 22", 160, 160)
+        .window("sim", 400, 400)
         .position_centered()
-        .resizable()
         .build()
         .unwrap();
 
-    let mut canvas = window.into_canvas().build().unwrap();
-
+    let mut canvas = window.into_canvas().software().build().unwrap();
     let texture_creator = canvas.texture_creator();
-    let texture = texture_creator.load_texture(tilesheet_path).unwrap();
 
-    canvas.set_draw_color(Color::RGB(0, 0, 0));
-    canvas.clear();
+    let mut tiles_texture = texture_creator
+        .load_texture(Path::new("taffer.png"))
+        .unwrap();
 
-    canvas.copy(&texture, None, None).expect("Render failed");
+    tiles_texture.set_color_mod(200, 200, 200);
 
-    'mainloop: loop {
-        for event in sdl_context.event_pump().unwrap().poll_iter() {
+    canvas
+        .copy(
+            &tiles_texture,
+            Some(Rect::new(9, 0, 9, 9)),
+            Some(Rect::new(200, 200, 9, 9)),
+        )
+        .unwrap();
+
+    canvas.present();
+
+    let mut event_pump = sdl_context.event_pump().unwrap();
+    let mut i = 0;
+    'running: loop {
+        i = (i + 1) % 255;
+        for event in event_pump.poll_iter() {
             match event {
                 Event::Quit { .. }
                 | Event::KeyDown {
-                    keycode: Option::Some(Keycode::Escape),
+                    keycode: Some(Keycode::Escape),
                     ..
-                } => break 'mainloop,
-                _ => {
-                    canvas.present();
-                }
+                } => break 'running,
+                _ => {}
             }
         }
+        // The rest of the game loop goes here...
     }
 }

@@ -1,8 +1,9 @@
 [package]
-name = "space_station_22"
+name = "space-station-22"
 version = "0.1.0"
-authors = ["Alexander Tesfamichael <Alex.Tesfamichael@gmail.com>"]
+edition = "2021"
 
 [dependencies.sdl2]
-version = "0.32.0-beta.2"
-features = ["ttf","image","gfx"]
+version = "0.35"
+default-features = false
+features = ["image"]
